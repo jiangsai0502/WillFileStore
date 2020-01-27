@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="UTF-8"/><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"/><link rel="apple-touch-icon" sizes="180x180" href="../ydoc/images/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="../ydoc/images/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="../ydoc/images/favicon-16x16.png"/><link rel="manifest" href="../ydoc/images/manifest.json"/><link rel="mask-icon" href="../ydoc/images/safari-pinned-tab.svg" color="#5bbad5"/><meta name="theme-color" content="#ffffff"/><meta http-equiv="Cache-Control" content="no-transform"/><meta http-equiv="Cache-Control" content="no-siteapp"/><title>PicGo+GitHub 搭建图床-社畜进阶</title><link rel="stylesheet" href="../ydoc/styles/style.css"/><meta name="author" content="ymfe"/><meta name="keywords"/><meta name="description" content="website description"/><meta id="releativePath" content=".."/><link rel="stylesheet" href="../ydoc/ydoc-plugin-search/search.css"/></head><body><div class="g-doc"><div class="m-aside"><div class="m-summary" id="js-menu"><div class="m-summary-content" id="js-menu-content"><div class="m-summary-block"><div class="m-summary-title">建站</div><ul class="m-summary-list indent"><li class="item"><a href="YDocBuild.html" class="href">Ydoc建站教程</a></li><li class="item"><a href="MarkdownUsage.html" class="href">Markdown语法</a></li><li class="item"><a href="" class="href">PicGo+GitHub 搭建图床</a></li></ul></div><div class="m-summary-block"><div class="m-summary-title">杂记</div><ul class="m-summary-list indent"><li class="item"><a href="ReinstallSystem.html" class="href">重装Mac</a></li><li class="item"><a href="PythonEnvironment.html" class="href">Python周边环境</a></li><li class="item"><a href="PythonBasicTutorial.html" class="href">Python入门导读</a></li><li class="item"><a href="FlaskBasicTutorial.html" class="href">Flask入门导读</a></li><li class="item"><a href="WebCrawlerGetStart.html" class="href">爬虫入门</a></li><li class="item"><a href="PMwork.html" class="href">PM工作小记</a></li><li class="item"><a href="Uncategorized.html" class="href">未分类</a></li></ul></div></div></div><div class="m-summary-switch" id="js-summary-switch"><svg viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15" class="bottom"><g transform="translate(904.92214,-879.1482)"><path d="m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,-55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,-174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,-174.68583 0.6895,0 26.281,25.03215 56.8701,55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864-231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,-104.0616 -231.873,-231.248 z" fill="#fff"></path></g></svg><svg viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15" class="top"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="aaa" fill="#fff" fill-rule="nonzero"><path d="M231.2455,342.502 L0,111.25397 L55.6165,55.62697 C86.2056,25.03212 111.7971,-2.99999998e-05 112.4866,-2.99999998e-05 C113.176,-2.99999998e-05 192.3503,78.60859 288.4293,174.6858 L463.1185,349.3716 L637.8077,174.6858 C733.8867,78.60859 813.060896,-2.99999997e-05 813.750396,-2.99999997e-05 C814.439896,-2.99999997e-05 840.031396,25.03212 870.620496,55.62697 L926.236996,111.25397 L694.9915,342.502 C567.8065,469.6884 463.4636,573.75 463.1185,573.75 C462.7734,573.75 358.4305,469.6884 231.2455,342.502 Z" id="Shape" transform="translate(463.118498, 286.874985) scale(1, -1) translate(-463.118498, -286.874985) "></path></g></g></svg></div></div><div class="m-main" id="js-panel"><header class="m-header" id="js-header"><div class="m-header-title js-logo"><a href="../index.html" target="_self"><h6 class="name">Will Jiang</h6></a></div><div><div class="m-search">
+      <div class="icon">&#xf0fd;</div>
+      <input type="text" class="input js-input" placeholder="搜索" />
+      <div class="m-search-result js-search-result"></div>
+    </div></div><nav class="m-header-nav js-nav"><ul class="m-header-items"><li class="item active"><a class="href" href="index.html">社畜进阶</a></li></ul></nav><div id="js-nav-btn" class="m-header-btn ui-font-ydoc"></div></header><div class="m-content" id="js-content"><div id="markdown-body" class="m-content-container markdown-body"><h1>PicGo+GitHub 搭建图床</h1>
+<blockquote>
+<p>讲剪切板上的截图发送到图床，生成在线的图片链接</p>
+</blockquote>
+<h3 id="创建自己的github图床">创建自己的GitHub图床</h3>
+<ol>
+<li>登陆GitHub</li>
+<li>创建Repository
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111135509.png" alt>
+点击&quot;New repository&quot;按钮
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111135617.png" alt></li>
+</ol>
+<blockquote>
+<p>按照1234步骤执行，建立一个名为Figurebed的repository</p>
+</blockquote>
+<p>3.生成一个Token用于操作GitHub repository
+回到主页，点击&quot;Settings&quot;按钮
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111135856.png" alt>
+进入页面后，点击&quot;Developer settings&quot;按钮
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111135837.png" alt>
+点击&quot;Personal access tokens&quot;按钮
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111135915.png" alt>
+点击&quot;Generate new token&quot;按钮
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111140018.png" alt>
+填写描述，选择&quot;repo&quot;,然后点击&quot;Generate token&quot;按钮
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111140125.png" alt></p>
+<blockquote>
+<p>注：创建成功后，会生成一串token，这串token之后不会再显示，所以第一次看到的时候，就要好好保存</p>
+</blockquote>
+<h3 id="配置picgo">配置PicGo</h3>
+<ol>
+<li>
+<p>下载运行PicGo
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111140351.png" alt></p>
+</li>
+<li>
+<p>配置图床
+<img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200111140408.png" alt></p>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li>设定仓库名的时候，是按照“账户名/仓库名”的格式填写
+<ul>
+<li>如 jiangsai0502/PicBedRepo</li>
+</ul>
+</li>
+<li>分支名统一填写“master”</li>
+<li>将之前的Token黏贴在这里</li>
+<li>存储路径可以写成img/，这样会在repository下创建一个“img”文件夹</li>
+<li>自定义域名的作用是，在上传图片后成功后，PicGo会将“自定义域名+上传的图片名”生成的访问链接，放到剪切板上https://raw.githubusercontent.com/账户名/仓库名/分支名，自定义域名需要按照这样去填写
+<ul>
+<li>如https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>快捷键及相关配置</li>
+</ol>
+<blockquote>
+<p>可将快捷键设置为cmd+2</p>
+</blockquote>
+<h2 id="总结">总结</h2>
+<p>将上面的步骤都设置好之后，每次截图之后，都可以按一下cmd+2，这样就会将剪切板上面的截图转化为在线网络图片链接，爽</p>
+</div><div class="m-content-container m-paging"><div class="m-paging-prev m-paging-item"><a href="MarkdownUsage.html" class="href"><span class="ui-font-ydoc"></span>Markdown语法</a></div><div class="m-paging-next m-paging-item"><a href="ReinstallSystem.html" class="href">重装Mac<span class="ui-font-ydoc"></span></a></div></div></div></div></div><div></div><script>
+    var $content = document.getElementById('js-content');
+    var $summaryItems = Array.prototype.slice.call(document.querySelectorAll('#js-menu .href'));
+    var $menu = document.getElementById('js-menu');
+    if (sessionStorage.prevPathname) {
+      sessionStorage.setItem('prevPrevPathname', sessionStorage.prevPathname);
+      sessionStorage.setItem('prevPrevMenuScrollTop', sessionStorage.prevMenuScrollTop);
+      sessionStorage.setItem('prevPrevContentScrollTop', sessionStorage.prevContentScrollTop);
+    }
+    if (sessionStorage.locationPathname) {
+      sessionStorage.setItem('prevPathname', sessionStorage.locationPathname);
+      sessionStorage.setItem('prevMenuScrollTop', sessionStorage.menuScrollTop);
+      sessionStorage.setItem('prevContentScrollTop', sessionStorage.contentScrollTop);
+    }
+    if ($menu && sessionStorage.menuScrollTop) {
+		  $menu.scrollTop = sessionStorage.menuScrollTop;
+    }
+    // 刷新页面但不切换 pathname 的时候，内容区恢复到记忆的高度
+    if ($content && sessionStorage.contentScrollTop && window.location.pathname == sessionStorage.locationPathname) {
+      $content.scrollTop = sessionStorage.contentScrollTop;
+    } else if (sessionStorage.prevPrevPathname && sessionStorage.prevPrevPathname === window.location.pathname) {
+      if ($menu && sessionStorage.prevPrevMenuScrollTop) {
+        $menu.scrollTop = sessionStorage.prevPrevMenuScrollTop;
+      }
+      if ($content && sessionStorage.prevPrevContentScrollTop) {
+        $content.scrollTop = sessionStorage.prevPrevContentScrollTop;
+      }
+    }
+    sessionStorage.setItem('locationPathname', window.location.pathname);
+    </script><script src="../ydoc/scripts/plugins/dollar.min.js"></script><script src="../ydoc/scripts/plugins/responsive-nav.min.js"></script><script src="../ydoc/scripts/plugins/slideout.min.js"></script><script src="../ydoc/scripts/app.js"></script><script src="../ydoc/ydoc-plugin-search/core.js"></script><script src="../ydoc/ydoc-plugin-search/search.js"></script><script src="../search_json.js"></script></body></html>

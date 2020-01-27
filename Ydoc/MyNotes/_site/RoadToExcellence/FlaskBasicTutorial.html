@@ -1,0 +1,800 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="UTF-8"/><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"/><link rel="apple-touch-icon" sizes="180x180" href="../ydoc/images/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="../ydoc/images/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="../ydoc/images/favicon-16x16.png"/><link rel="manifest" href="../ydoc/images/manifest.json"/><link rel="mask-icon" href="../ydoc/images/safari-pinned-tab.svg" color="#5bbad5"/><meta name="theme-color" content="#ffffff"/><meta http-equiv="Cache-Control" content="no-transform"/><meta http-equiv="Cache-Control" content="no-siteapp"/><title>flask 入门-社畜进阶</title><link rel="stylesheet" href="../ydoc/styles/style.css"/><meta name="author" content="ymfe"/><meta name="keywords"/><meta name="description" content="website description"/><meta id="releativePath" content=".."/><link rel="stylesheet" href="../ydoc/ydoc-plugin-search/search.css"/></head><body><div class="g-doc"><div class="m-aside"><div class="m-summary" id="js-menu"><div class="m-summary-content" id="js-menu-content"><div class="m-summary-block"><div class="m-summary-title">建站</div><ul class="m-summary-list indent"><li class="item"><a href="YDocBuild.html" class="href">Ydoc建站教程</a></li><li class="item"><a href="MarkdownUsage.html" class="href">Markdown语法</a></li><li class="item"><a href="PicGo_GitHub.html" class="href">PicGo+GitHub 搭建图床</a></li></ul></div><div class="m-summary-block"><div class="m-summary-title">杂记</div><ul class="m-summary-list indent"><li class="item"><a href="ReinstallSystem.html" class="href">重装Mac</a></li><li class="item"><a href="PythonEnvironment.html" class="href">Python周边环境</a></li><li class="item"><a href="PythonBasicTutorial.html" class="href">Python入门导读</a></li><li class="item"><a href="" class="href">Flask入门导读</a></li><li class="item"><a href="WebCrawlerGetStart.html" class="href">爬虫入门</a></li><li class="item"><a href="PMwork.html" class="href">PM工作小记</a></li><li class="item"><a href="Uncategorized.html" class="href">未分类</a></li></ul></div></div></div><div class="m-summary-switch" id="js-summary-switch"><svg viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15" class="bottom"><g transform="translate(904.92214,-879.1482)"><path d="m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,-55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,-174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,-174.68583 0.6895,0 26.281,25.03215 56.8701,55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864-231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,-104.0616 -231.873,-231.248 z" fill="#fff"></path></g></svg><svg viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15" class="top"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="aaa" fill="#fff" fill-rule="nonzero"><path d="M231.2455,342.502 L0,111.25397 L55.6165,55.62697 C86.2056,25.03212 111.7971,-2.99999998e-05 112.4866,-2.99999998e-05 C113.176,-2.99999998e-05 192.3503,78.60859 288.4293,174.6858 L463.1185,349.3716 L637.8077,174.6858 C733.8867,78.60859 813.060896,-2.99999997e-05 813.750396,-2.99999997e-05 C814.439896,-2.99999997e-05 840.031396,25.03212 870.620496,55.62697 L926.236996,111.25397 L694.9915,342.502 C567.8065,469.6884 463.4636,573.75 463.1185,573.75 C462.7734,573.75 358.4305,469.6884 231.2455,342.502 Z" id="Shape" transform="translate(463.118498, 286.874985) scale(1, -1) translate(-463.118498, -286.874985) "></path></g></g></svg></div></div><div class="m-main" id="js-panel"><header class="m-header" id="js-header"><div class="m-header-title js-logo"><a href="../index.html" target="_self"><h6 class="name">Will Jiang</h6></a></div><div><div class="m-search">
+      <div class="icon">&#xf0fd;</div>
+      <input type="text" class="input js-input" placeholder="搜索" />
+      <div class="m-search-result js-search-result"></div>
+    </div></div><nav class="m-header-nav js-nav"><ul class="m-header-items"><li class="item active"><a class="href" href="index.html">社畜进阶</a></li></ul></nav><div id="js-nav-btn" class="m-header-btn ui-font-ydoc"></div></header><div class="m-content" id="js-content"><div id="markdown-body" class="m-content-container markdown-body"><h1>flask 入门</h1>
+<h3 id="安装-flask-环境">安装 flask 环境</h3>
+<ol>
+<li>查看虚拟环境： conda info --envs</li>
+<li>创建虚拟环境 conda create -n flask_py3 python=3.7</li>
+<li>激活虚拟环境： source activate flask_py3</li>
+<li>安装flask： pip install flask</li>
+<li>安装 Flask-WTF 表单插件： pip install Flask-WTF</li>
+<li>安装 flask-sqlalchemy 数据库抽象插件：pip install flask-sqlalchemy</li>
+<li>安装 flask-mysqldb 数据库插件：pip install pymysql</li>
+<li>安装MySQL 数据库插件：pip install cryptography</li>
+<li>查看环境下所有包 conda list</li>
+<li>配置 VS Code 环境设置
+<ol>
+<li>setting.json : &quot;python.pythonPath&quot;: &quot;/Users/jiangsai02/opt/anaconda3/envs/flask_py3/bin/python&quot;</li>
+</ol>
+</li>
+<li>requirements.txt
+<ol>
+<li>python项目中必须包含一个 requirements.txt 文件，用于记录所有依赖包及其精确的版本号，以便新环境部署</li>
+<li>在本机的虚拟环境下使用pip生成<br>
+<code>pip freeze &gt;requirements.txt</code></li>
+<li>将 requirements.txt 文件拷贝到部署机器的虚拟目录下，进入文件所在目录，进入虚拟环境，安装全部依赖<br>
+<code>cd /Users/jiangsai02/opt/anaconda3/envs/flask_py3</code>
+<code>source activate flask_py3</code><br>
+<code>pip install -r requirements.txt</code></li>
+</ol>
+</li>
+</ol>
+<h4>Flask 调试</h4>
+<p><strong>切记！！！</strong>: <code>app.run(debug=False)</code> 一定不能开启调试！否则无法命中断点</p>
+<blockquote>
+<ol>
+<li><code>lanuch.json</code>是<code>debug</code>相关的配置文件</li>
+<li>&quot;stopOnEntry&quot;: true 进入程序时立即暂停执行，相当于在程序的第一行放一个断点</li>
+</ol>
+<blockquote>
+<pre><code class="language-python"><span class="token string">"configurations"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+   <span class="token punctuation">{</span>
+       <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Python: Current File (Integrated Terminal)"</span><span class="token punctuation">,</span>
+       <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"python"</span><span class="token punctuation">,</span>
+       <span class="token string">"request"</span><span class="token punctuation">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
+       <span class="token string">"program"</span><span class="token punctuation">:</span> <span class="token string">"${file}"</span><span class="token punctuation">,</span>
+       <span class="token string">"console"</span><span class="token punctuation">:</span> <span class="token string">"integratedTerminal"</span><span class="token punctuation">,</span>
+       <span class="token string">"stopOnEntry"</span><span class="token punctuation">:</span> true<span class="token punctuation">,</span>
+   <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+</blockquote>
+<ol start="3">
+<li><strong>切记！！！</strong> ：Flask在启动时必须指定 <code>app.run(debug=False)</code>，一定不能开启调试！否则无法命中断点</li>
+</ol>
+<pre><code class="language-python"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+</code></pre>
+<ol start="4">
+<li>
+<p>监视变量</p>
+<p>Debug 时有两种方式监视变量</p>
+<p>&lt;1&gt; variables (变量窗口) 会默认显示当前 scope 内的 local 变量的值</p>
+<p>&lt;2&gt; watch (监视窗口) 是用户自己输入的表达式，因此不仅限于变量的值，还可以监视变量的变化</p>
+<p><img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200124144504.png" alt></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/41189402" target="_blank">参考</a></p>
+</li>
+</ol>
+</blockquote>
+<h4>一个最小的应用：返回字符串</h4>
+<pre><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello_world</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">'Hello Flask Sai!'</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/&lt;order_id>'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">get_order_id</span><span class="token punctuation">(</span>order_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Your order ID Type : </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">type</span><span class="token punctuation">(</span>order_id<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'Your order ID : </span><span class="token interpolation"><span class="token punctuation">{</span>order_id<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>剖析</strong></p>
+<blockquote>
+<ol>
+<li>创建Flask 应用程序实例</li>
+</ol>
+<blockquote>
+<pre><code class="language-python">app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>__name__的作用是确定资源所在路径</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>定义路由及视图函数</li>
+</ol>
+<blockquote>
+<pre><code class="language-python"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello_world</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">'Hello Flask Sai!'</span>
+</code></pre>
+<ol>
+<li>用 app 变量的 route() 装饰器来告诉 Flask 框架，哪些 URL 触发哪些视图函数</li>
+<li>如 对路径 '/' 的请求，将触发对 hello_world() 函数的调用</li>
+<li>如 对路径 '/&lt;order_id&gt;' 的请求，将触发对 get_order_id() 函数的调用</li>
+<li>路由默认只支持 GET 请求，可用 methods = [] 自行扩展</li>
+</ol>
+<pre><code>@app.route(&#x27;/&#x3C;order_id&#x3E;&#x27;)
+def get_order_id(order_id):
+    return f&#x27;Your order ID : {order_id}&#x27;
+</code></pre>
+<ol>
+<li>使用同一个视图函数 get_order_id() 显示不同用户的订单信息</li>
+<li>格式：1. &lt;路由参数&gt; 2. get_order_id(路由参数)</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>启动程序</li>
+</ol>
+<blockquote>
+<pre><code class="language-python"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>app.run()将 Flask 运行到一个 Flask 提供的简易测试服务器上</li>
+<li>debug = True 启动调试模式，每次修改代码后服务自动重启</li>
+<li>app.run(port = 8888, debug = True) 可将 Web 服务默认监听本地的 5000 端口修改为监听 8888 端口，即 http://127.0.0.1:8888/</li>
+</ol>
+</blockquote>
+</blockquote>
+<h4>一个最小的应用：返回网页</h4>
+<ul>
+<li>创建一个基本的 Flask 目录结构</li>
+</ul>
+<pre><code class="language-markdown">├── ~/Documents/Temp/SaiFlask/
+    ├── app.py
+    ├── templates/
+        ├── index.html
+        └── HelloYou.html
+    └── static/
+        ├── TeddyBear.jpg
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app.py</code></td>
+<td>主程序</td>
+</tr>
+<tr>
+<td><code>templates</code></td>
+<td>存放模板文件</td>
+</tr>
+<tr>
+<td><code>static</code></td>
+<td>存放静态文件，如图片，音频，视频，JS文件以及样式文件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>1_Index.html</li>
+</ul>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>title<span class="token operator">></span>Hello Sample<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">if</span> name <span class="token operator">%</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">></span>Hello <span class="token punctuation">{</span><span class="token punctuation">{</span> name <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">else</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">></span>Hello World<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> endif <span class="token operator">%</span><span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>2_CodeBlock.html</li>
+</ul>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>title<span class="token operator">></span>Hello CodeBlock<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+MovieList 是 <span class="token punctuation">{</span><span class="token punctuation">{</span> MovieList <span class="token punctuation">}</span><span class="token punctuation">}</span>，共计 <span class="token punctuation">{</span><span class="token punctuation">{</span> MovieList <span class="token operator">|</span> length <span class="token punctuation">}</span><span class="token punctuation">}</span> 部电影 <span class="token operator">&lt;</span>br<span class="token operator">></span>
+电影列表是 <span class="token operator">&lt;</span>br<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> movie <span class="token keyword">in</span> MovieList <span class="token operator">%</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> movie<span class="token punctuation">.</span>title <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">-</span> <span class="token punctuation">{</span><span class="token punctuation">{</span> movie<span class="token punctuation">.</span>year <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span>hr<span class="token operator">></span>
+NumList 是 <span class="token punctuation">{</span><span class="token punctuation">{</span> NumList <span class="token punctuation">}</span><span class="token punctuation">}</span>，共计 <span class="token punctuation">{</span><span class="token punctuation">{</span> NumList <span class="token operator">|</span> length <span class="token punctuation">}</span><span class="token punctuation">}</span> 个数 <span class="token operator">&lt;</span>br<span class="token operator">></span>
+小于 <span class="token number">10</span> 的数是 <span class="token operator">&lt;</span>br<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> num <span class="token keyword">in</span> NumList <span class="token operator">%</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">if</span> num <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+        <span class="token punctuation">{</span><span class="token punctuation">{</span> num <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> endif <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>3_Filter.html</li>
+</ul>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>title<span class="token operator">></span>Hello Filter<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+
+百度的网址：<span class="token punctuation">{</span><span class="token punctuation">{</span>BaiduUrl<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+字符串大写：<span class="token punctuation">{</span><span class="token punctuation">{</span>BaiduUrl <span class="token operator">|</span> upper <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+字符串反转：<span class="token punctuation">{</span><span class="token punctuation">{</span>BaiduUrl <span class="token operator">|</span> reverse <span class="token operator">|</span> upper <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+</code></pre>
+<ul>
+<li>4_OriginalWebForm</li>
+</ul>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>form method<span class="token operator">=</span><span class="token string">"POST"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>label<span class="token operator">></span>用户名：<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"username"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>label<span class="token operator">></span>密码：<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"password"</span> name<span class="token operator">=</span><span class="token string">"password"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>label<span class="token operator">></span>确认密码：<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"password"</span> name<span class="token operator">=</span><span class="token string">"password2"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"submit"</span> value<span class="token operator">=</span><span class="token string">"提交"</span><span class="token operator">></span><span class="token operator">&lt;</span>br<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+</code></pre>
+<ul>
+<li>5_FlashWebForm.html</li>
+</ul>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>form method<span class="token operator">=</span><span class="token string">"POST"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>label<span class="token operator">></span>用户名：<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"username"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>label<span class="token operator">></span>密码：<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"password"</span> name<span class="token operator">=</span><span class="token string">"password"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>label<span class="token operator">></span>确认密码：<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span> <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"password"</span> name<span class="token operator">=</span><span class="token string">"password2"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"submit"</span> value<span class="token operator">=</span><span class="token string">"提交"</span><span class="token operator">></span><span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> message <span class="token keyword">in</span> <span class="token function">get_flashed_messages</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+        <span class="token punctuation">{</span><span class="token punctuation">{</span> message <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+</code></pre>
+<ul>
+<li>6_FlaskWTForm.html</li>
+</ul>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>form method<span class="token operator">=</span><span class="token string">"POST"</span><span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span><span class="token function">csrf_token</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>username<span class="token punctuation">.</span>label <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>username <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password<span class="token punctuation">.</span>label <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password2<span class="token punctuation">.</span>label <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password2 <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>submit <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> message <span class="token keyword">in</span> <span class="token function">get_flashed_messages</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+        <span class="token punctuation">{</span><span class="token punctuation">{</span> message <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+</code></pre>
+<ul>
+<li>app.py</li>
+</ul>
+<pre><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> render_template
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> request
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> flash
+<span class="token keyword">from</span> flask_wtf <span class="token keyword">import</span> FlaskForm
+<span class="token keyword">from</span> wtforms <span class="token keyword">import</span> StringField<span class="token punctuation">,</span> PasswordField<span class="token punctuation">,</span> SubmitField
+<span class="token keyword">from</span> wtforms<span class="token punctuation">.</span>validators <span class="token keyword">import</span> EqualTo<span class="token punctuation">,</span> DataRequired
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span>secret_key <span class="token operator">=</span> <span class="token string">'The secret string for encryption'</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/&lt;name>'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">Index</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'1_Index.html'</span><span class="token punctuation">,</span> name <span class="token operator">=</span> name<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/cb'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">CodeBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    MovieList <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'My Neighbor Totoro'</span><span class="token punctuation">,</span> <span class="token string">'year'</span><span class="token punctuation">:</span> <span class="token string">'1988'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Dead Poets Society'</span><span class="token punctuation">,</span> <span class="token string">'year'</span><span class="token punctuation">:</span> <span class="token string">'1989'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'A Perfect World'</span><span class="token punctuation">,</span> <span class="token string">'year'</span><span class="token punctuation">:</span> <span class="token string">'1993'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+    NumList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'2_CodeBlock.html'</span><span class="token punctuation">,</span> NumList <span class="token operator">=</span> NumList<span class="token punctuation">,</span> MovieList <span class="token operator">=</span> MovieList<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/f'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">Filter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    BaiduUrl <span class="token operator">=</span> <span class="token string">'https://www.baidu.com/'</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'3_Filter.html'</span><span class="token punctuation">,</span> BaiduUrl <span class="token operator">=</span> BaiduUrl<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/ot'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">OriginalWebForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">)</span>
+        password <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span>
+        password2 <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password2'</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'你输入的用户：</span><span class="token interpolation"><span class="token punctuation">{</span>username<span class="token punctuation">}</span></span><span class="token string">，密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password<span class="token punctuation">}</span></span><span class="token string">，确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password2<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> password2<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">'参数不完整'</span>
+        <span class="token keyword">elif</span> password <span class="token operator">!=</span> password2<span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">'两次输入的密码不同'</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">'POST 成功了, Yeah'</span>
+        <span class="token keyword">return</span> result
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'4_OriginalWebForm.html'</span><span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/ft'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">FlashWebForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">)</span>
+        password <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span>
+        password2 <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password2'</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'FlashWebForm 用户名：</span><span class="token interpolation"><span class="token punctuation">{</span>username<span class="token punctuation">}</span></span><span class="token string">，密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password<span class="token punctuation">}</span></span><span class="token string">，确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password2<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> password2<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            flash<span class="token punctuation">(</span><span class="token string">'参数不完整'</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> password <span class="token operator">!=</span> password2<span class="token punctuation">:</span>
+            flash<span class="token punctuation">(</span><span class="token string">'两次输入的密码不同'</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'FlashWebForm 成功了, Yeah'</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'5_FlashWebForm.html'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">LoginForm</span><span class="token punctuation">(</span>FlaskForm<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    username <span class="token operator">=</span> StringField<span class="token punctuation">(</span><span class="token string">'用户名'</span><span class="token punctuation">,</span> validators <span class="token operator">=</span> <span class="token punctuation">[</span>DataRequired<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    password <span class="token operator">=</span> PasswordField<span class="token punctuation">(</span><span class="token string">'密码'</span><span class="token punctuation">,</span> validators <span class="token operator">=</span> <span class="token punctuation">[</span>DataRequired<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    password2 <span class="token operator">=</span> PasswordField<span class="token punctuation">(</span><span class="token string">'确认密码'</span><span class="token punctuation">,</span> validators <span class="token operator">=</span> <span class="token punctuation">[</span>DataRequired<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> EqualTo<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">,</span> <span class="token string">'密码不一致'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    submit <span class="token operator">=</span> SubmitField<span class="token punctuation">(</span><span class="token string">'提交'</span><span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/fwt'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">FlaskWTForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    login_form <span class="token operator">=</span> LoginForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'FlaskWTForm 用户名：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>username<span class="token punctuation">.</span>data<span class="token punctuation">}</span></span><span class="token string">, 密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>password<span class="token punctuation">.</span>data<span class="token punctuation">}</span></span><span class="token string">, 确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>password2<span class="token punctuation">.</span>data<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'FlaskWTForm 用户名：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">, 密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">, 确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">"password2"</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> login_form<span class="token punctuation">.</span>validate_on_submit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'FlaskWTForm 成功了, Yeah'</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        flash<span class="token punctuation">(</span>login_form<span class="token punctuation">.</span>errors<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'6_FlaskWTForm.html'</span><span class="token punctuation">,</span> login_form_web <span class="token operator">=</span> login_form<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>剖析</strong></p>
+<blockquote>
+<p><strong>2_CodeBlock.html</strong></p>
+<pre><code class="language-js">myList 是 <span class="token punctuation">{</span><span class="token punctuation">{</span> myList <span class="token punctuation">}</span><span class="token punctuation">}</span>，而小于 <span class="token number">10</span> 的是<span class="token operator">&lt;</span>br<span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> num <span class="token keyword">in</span> myList <span class="token operator">%</span><span class="token punctuation">}</span>
+ <span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">if</span> num <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+     <span class="token punctuation">{</span><span class="token punctuation">{</span> num <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>br<span class="token operator">></span>
+ <span class="token punctuation">{</span><span class="token operator">%</span> endif <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+</code></pre>
+<ol>
+<li>{% %} 表示控制代码块</li>
+<li>{{ }} 表示 HTML 的变量代码块</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>3_Filter.html</strong></p>
+<pre><code class="language-javascript">百度的网址：<span class="token punctuation">{</span><span class="token punctuation">{</span>BaiduUrl<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+字符串大写：<span class="token punctuation">{</span><span class="token punctuation">{</span>BaiduUrl <span class="token operator">|</span> upper <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+字符串反转：<span class="token punctuation">{</span><span class="token punctuation">{</span>BaiduUrl <span class="token operator">|</span> reverse <span class="token operator">|</span> upper <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+</code></pre>
+<ol>
+<li>过滤器格式：变量名 | 过滤器 {{ variable | filter_name(*args) }}</li>
+<li>过滤器的链式调用，即拼接多个过滤器 {{ variable | filter_name(*args) | filter_name(*args) }}</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>5_FlashWebForm.html</strong></p>
+<pre><code class="language-javascript"><span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> message <span class="token keyword">in</span> <span class="token function">get_flashed_messages</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> message <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+</code></pre>
+<ol>
+<li>get_flashed_messages() 方法接受后端传来的 flash 消息</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>6_FlaskWTForm.html</strong></p>
+<pre><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>form method<span class="token operator">=</span><span class="token string">"POST"</span><span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span><span class="token function">csrf_token</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>username<span class="token punctuation">.</span>label <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>username <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password<span class="token punctuation">.</span>label <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password2<span class="token punctuation">.</span>label <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>password2 <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> login_form_web<span class="token punctuation">.</span>submit <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>br<span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> <span class="token keyword">for</span> message <span class="token keyword">in</span> <span class="token function">get_flashed_messages</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token punctuation">}</span>
+        <span class="token punctuation">{</span><span class="token punctuation">{</span> message <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token operator">%</span> endfor <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+</code></pre>
+<ol>
+<li>WTForms默认开启CSRF保护，所以必须有这段代码 &lt;实例名&gt;..csrf_token()</li>
+</ol>
+</blockquote>
+<blockquote>
+<pre><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> render_template
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/&lt;name>'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">Index</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+ <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'1_Index.html'</span><span class="token punctuation">,</span> name <span class="token operator">=</span> name<span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>渲染模板需要导入 render_template</li>
+<li>对路径 '/' 的请求，将触发对 Index() 函数的调用</li>
+<li>对路径 '/&lt;name&gt;' 的请求，将触发对 Index() 函数的调用，<name> 是任意 str</name></li>
+<li>render_template('1_Index.html') 将渲染 templates 目录下的 1_Index.html 模板</li>
+<li>模板 1_Index.html 中的变量名和 app.py 中的变量保持一致，即 name = name</li>
+</ol>
+</blockquote>
+<blockquote>
+<pre><code class="language-python"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/cb'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">CodeBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    myList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'2_CodeBlock.html'</span><span class="token punctuation">,</span> myList <span class="token operator">=</span> myList<span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>对路径 '/cb' 的请求，将触发对 CodeBlock() 函数的调用</li>
+</ol>
+</blockquote>
+<blockquote>
+<pre><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> request
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/t'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">OriginalWebForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">)</span>
+        password <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span>
+        password2 <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password2'</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'你输入的用户：</span><span class="token interpolation"><span class="token punctuation">{</span>username<span class="token punctuation">}</span></span><span class="token string">，密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password<span class="token punctuation">}</span></span><span class="token string">，确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password2<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> password2<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">'参数不完整'</span>
+        <span class="token keyword">elif</span> password <span class="token operator">!=</span> password2<span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">'两次输入的密码不同'</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            result <span class="token operator">=</span> <span class="token string">'POST 成功了, Yeah'</span>
+        <span class="token keyword">return</span> result
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'4_OriginalWebForm.html'</span><span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>获取前端的上传请求消息，需要导入 request 模块</li>
+<li>表单上传是 'POST' 方式</li>
+<li>路由通过 request.method 判断请求方式：'GET', 'POST' 。必须大写</li>
+<li>路由通过 request.form.get() 从前端获取请求的参数</li>
+</ol>
+</blockquote>
+<blockquote>
+<pre><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> flash
+
+app<span class="token punctuation">.</span>secret_key <span class="token operator">=</span> <span class="token string">'The secret string for encryption'</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/ft'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">FlashWebForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">)</span>
+        password <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span>
+        password2 <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password2'</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'你输入的用户：</span><span class="token interpolation"><span class="token punctuation">{</span>username<span class="token punctuation">}</span></span><span class="token string">，密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password<span class="token punctuation">}</span></span><span class="token string">，确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>password2<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> password2<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            flash<span class="token punctuation">(</span><span class="token string">'参数不完整'</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> password <span class="token operator">!=</span> password2<span class="token punctuation">:</span>
+            flash<span class="token punctuation">(</span><span class="token string">'两次输入的密码不同'</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'POST 成功了, Yeah'</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'5_FlashWebForm.html'</span><span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>从后端向前端传递消息，要导入 flash 模块</li>
+<li>通过 secret_key 给后端的消息加密</li>
+</ol>
+</blockquote>
+<blockquote>
+<pre><code class="language-python"><span class="token keyword">from</span> flask_wtf <span class="token keyword">import</span> FlaskForm
+
+<span class="token keyword">from</span> wtforms <span class="token keyword">import</span> StringField<span class="token punctuation">,</span> PasswordField<span class="token punctuation">,</span> SubmitField
+
+<span class="token keyword">from</span> wtforms<span class="token punctuation">.</span>validators <span class="token keyword">import</span> EqualTo<span class="token punctuation">,</span> DataRequired
+
+<span class="token keyword">class</span> <span class="token class-name">LoginForm</span><span class="token punctuation">(</span>FlaskForm<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    username <span class="token operator">=</span> StringField<span class="token punctuation">(</span><span class="token string">'用户名'</span><span class="token punctuation">,</span> validators <span class="token operator">=</span> <span class="token punctuation">[</span>Required<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    password <span class="token operator">=</span> PasswordField<span class="token punctuation">(</span><span class="token string">'密码'</span><span class="token punctuation">,</span> validators <span class="token operator">=</span> <span class="token punctuation">[</span>Required<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    password2 <span class="token operator">=</span> PasswordField<span class="token punctuation">(</span><span class="token string">'确认密码'</span><span class="token punctuation">,</span> validators <span class="token operator">=</span> <span class="token punctuation">[</span>Required<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> EqualTo<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">,</span> <span class="token string">'密码不一致'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    submit <span class="token operator">=</span> SubmitField<span class="token punctuation">(</span><span class="token string">'提交'</span><span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/fwt'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">FlaskWTForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    login_form <span class="token operator">=</span> LoginForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'FlaskWTForm 用户名：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>username<span class="token punctuation">.</span>data<span class="token punctuation">}</span></span><span class="token string">, 密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>password<span class="token punctuation">.</span>data<span class="token punctuation">}</span></span><span class="token string">, 确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>password2<span class="token punctuation">.</span>data<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'FlaskWTForm 用户名：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">, 密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">, 确认密码：</span><span class="token interpolation"><span class="token punctuation">{</span>login_form<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">"password2"</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> login_form<span class="token punctuation">.</span>validate_on_submit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'FlaskWTForm 成功了, Yeah'</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        flash<span class="token punctuation">(</span>login_form<span class="token punctuation">.</span>errors<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'6_FlaskWTForm.html'</span><span class="token punctuation">,</span> login_form_web <span class="token operator">=</span> login_form<span class="token punctuation">)</span>
+</code></pre>
+<ol>
+<li>使用 Flask-WTF 验证表单数据</li>
+</ol>
+<blockquote>
+<ol>
+<li>安装Flask-WTF： pip install Flask-WTF</li>
+<li>StringField 文本字段</li>
+<li>PasswordField 密码文本字段</li>
+<li>SubmitField 表单提交按钮</li>
+<li>EqualTo 验证函数，比较两个字段的值</li>
+<li>DataRequired 验证函数，确保字段中有数据</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>替代 request.method == 'POST' ，验证 FlaskForm 表单是否提交</li>
+</ol>
+<blockquote>
+<ol>
+<li>方法：validate_on_submit()</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>获取 FlaskForm 属性值的两种方式</li>
+</ol>
+<blockquote>
+<ol>
+<li>login_form.username.data</li>
+<li>login_form.data[&quot;username&quot;]</li>
+</ol>
+</blockquote>
+</blockquote>
+<h4>一个最小的应用：使用数据库</h4>
+<pre><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+<span class="token keyword">from</span> flask_sqlalchemy <span class="token keyword">import</span> SQLAlchemy
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span>config<span class="token punctuation">[</span><span class="token string">'SQLALCHEMY_DATABASE_URI'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'mysql+pymysql://root:sai@127.0.0.1/sql_demo'</span>
+app<span class="token punctuation">.</span>config<span class="token punctuation">[</span><span class="token string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">True</span>
+myDB <span class="token operator">=</span> SQLAlchemy<span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Role</span><span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    __tablename__ <span class="token operator">=</span> <span class="token string">'DB_Role'</span>
+    <span class="token builtin">id</span> <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>String<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    users <span class="token operator">=</span> myDB<span class="token punctuation">.</span>relationship<span class="token punctuation">(</span><span class="token string">'User'</span><span class="token punctuation">,</span> backref<span class="token operator">=</span><span class="token string">'role'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    __tablename__ <span class="token operator">=</span> <span class="token string">'DB_User'</span>
+    <span class="token builtin">id</span> <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>String<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span> unique<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    role_id <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> myDB<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span><span class="token string">'DB_Role.id'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    myDB<span class="token punctuation">.</span>drop_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    myDB<span class="token punctuation">.</span>create_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 增</span>
+    ro1 <span class="token operator">=</span> Role<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'管理员'</span><span class="token punctuation">)</span>
+    ro2 <span class="token operator">=</span> Role<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'用户'</span><span class="token punctuation">)</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add_all<span class="token punctuation">(</span><span class="token punctuation">[</span>ro1<span class="token punctuation">,</span> ro2<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    us1 <span class="token operator">=</span> User<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'小李'</span><span class="token punctuation">,</span> role_id<span class="token operator">=</span>ro1<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">)</span>
+    us2 <span class="token operator">=</span> User<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'小欣'</span><span class="token punctuation">,</span> role_id<span class="token operator">=</span>ro2<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">)</span>
+    us3 <span class="token operator">=</span> User<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'小曲'</span><span class="token punctuation">,</span> role_id<span class="token operator">=</span>ro1<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">)</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add_all<span class="token punctuation">(</span><span class="token punctuation">[</span>us1<span class="token punctuation">,</span> us2<span class="token punctuation">,</span> us3<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    userlist <span class="token operator">=</span> myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>query<span class="token punctuation">(</span>User<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> each_user <span class="token keyword">in</span> userlist<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'User id: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">}</span></span><span class="token string"> | User name: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string"> | User role_id: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span>role_id<span class="token punctuation">}</span></span><span class="token string"> | User role: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span>role<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    
+    rolelist <span class="token operator">=</span> myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>query<span class="token punctuation">(</span>Role<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> each_role <span class="token keyword">in</span> rolelist<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Role id: </span><span class="token interpolation"><span class="token punctuation">{</span>each_role<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">}</span></span><span class="token string"> | Role name: </span><span class="token interpolation"><span class="token punctuation">{</span>each_role<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string"> | Role users: </span><span class="token interpolation"><span class="token punctuation">{</span>each_role<span class="token punctuation">.</span>users<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 改</span>
+    us1<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'sai'</span>
+    us2<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'chao'</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 删</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>delete<span class="token punctuation">(</span>us1<span class="token punctuation">)</span>
+    myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> port <span class="token operator">=</span> <span class="token number">8888</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>剖析</strong></p>
+<blockquote>
+<ol>
+<li>首先安装 MySQL 数据库</li>
+</ol>
+<blockquote>
+<ol>
+<li>详情查看 PythonEnvironment.md</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>
+<p>设置连接数据库的URL</p>
+<pre><code class="language-sql">app<span class="token punctuation">.</span>config<span class="token punctuation">[</span><span class="token string">'SQLALCHEMY_DATABASE_URI'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'mysql+pymysql://root:sai@127.0.0.1/sql_demo'</span>
+</code></pre>
+<blockquote>
+<ol>
+<li>数据库协议：mysql+pymysql（不可变）</li>
+<li>用户名：root（可改为其他用户名）</li>
+<li>用户名密码：sai</li>
+<li>服务器地址：127.0.0.1 或 localhost</li>
+<li>数据库名：sql_demo</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>设置每次请求结束后会自动提交数据库的改动（为降低消耗资源，可设为False）</p>
+<pre><code class="language-python">app<span class="token punctuation">.</span>config<span class="token punctuation">[</span><span class="token string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">True</span>
+</code></pre>
+</li>
+<li>
+<p>通过类 SQLAlchemy 来连接数据库</p>
+<pre><code class="language-python">myDB <span class="token operator">=</span> SQLAlchemy<span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>定义角色类 Role 都继承数据库模型 myDB.Model</p>
+<blockquote>
+<ol>
+<li>
+<p>定义 Role 在数据库中的表名</p>
+<pre><code class="language-python">__tablename__ <span class="token operator">=</span> <span class="token string">'roles'</span>
+</code></pre>
+</li>
+<li>
+<p>定义 id 为整数型，为主键</p>
+<pre><code class="language-python"><span class="token builtin">id</span> <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>定义 name 为字符型，最大 64 个字符</p>
+<pre><code class="language-python">name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>String<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>关于 relationship 的用法**（不懂，但是完全不影响，可以不使用）**</p>
+<pre><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Role</span><span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    __tablename__ <span class="token operator">=</span> <span class="token string">'DB_Role'</span>
+    <span class="token builtin">id</span> <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>String<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    users <span class="token operator">=</span> myDB<span class="token punctuation">.</span>relationship<span class="token punctuation">(</span><span class="token string">'User'</span><span class="token punctuation">,</span> backref<span class="token operator">=</span><span class="token string">'role'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    __tablename__ <span class="token operator">=</span> <span class="token string">'DB_User'</span>
+    <span class="token builtin">id</span> <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>String<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span> unique<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    role_id <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> myDB<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span><span class="token string">'DB_Role.id'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+</code></pre>
+<blockquote>
+<ol>
+<li>
+<p>声明数据库 DB_Role 表的表名：<code>__tablename__ = 'DB_Role'</code></p>
+</li>
+<li>
+<p>声明数据库 DB_Role 表的字段：id ,  name</p>
+</li>
+<li>
+<p>id ,  name 是数据库 DB_Role 表的字段，而 user 不是字段，users 是为方便查询虚拟存在的。myDB.Column() <strong>声明字段</strong>，myDB.relationship() <strong>声明关系</strong></p>
+<pre><code class="language-python"><span class="token builtin">id</span> <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span><span class="token punctuation">)</span>
+name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span><span class="token punctuation">)</span>
+users <span class="token operator">=</span> myDB<span class="token punctuation">.</span>relationship<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>第一步，给 <strong>Role 模型</strong> 增加一个 users 属性，并与 <strong>User 模型</strong>建立关联</p>
+<pre><code class="language-python">users <span class="token operator">=</span> myDB<span class="token punctuation">.</span>relationship<span class="token punctuation">(</span><span class="token string">'User'</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>第二步，给 <strong>User 模型</strong> 增加一个 role 属性，并与 <strong>Role 模型</strong>建立关联</p>
+<pre><code class="language-python">users <span class="token operator">=</span> myDB<span class="token punctuation">.</span>relationship<span class="token punctuation">(</span><span class="token string">'User'</span><span class="token punctuation">,</span> backref<span class="token operator">=</span><span class="token string">'role'</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>声明了上面这一句代码，就相当于：给 <strong>Role 模型</strong> 增加一个 users 属性，同时给 <strong>User 模型</strong> 增加一个 role 属性。 <strong>Role 模型</strong> 中的一句代码给 <strong>User 模型</strong> 增加了一个属性，很神奇</p>
+</li>
+<li>
+<p>用法</p>
+<pre><code class="language-python">userlist <span class="token operator">=</span> myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>query<span class="token punctuation">(</span>User<span class="token punctuation">)</span>
+<span class="token keyword">for</span> each_user <span class="token keyword">in</span> userlist<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'User id: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">}</span></span><span class="token string"> | User name: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string"> | User role_id: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span>role_id<span class="token punctuation">}</span></span><span class="token string"> | User role: </span><span class="token interpolation"><span class="token punctuation">{</span>each_user<span class="token punctuation">.</span>role<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+rolelist <span class="token operator">=</span> myDB<span class="token punctuation">.</span>session<span class="token punctuation">.</span>query<span class="token punctuation">(</span>Role<span class="token punctuation">)</span>
+<span class="token keyword">for</span> each_role <span class="token keyword">in</span> rolelist<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Role id: </span><span class="token interpolation"><span class="token punctuation">{</span>each_role<span class="token punctuation">.</span><span class="token builtin">id</span><span class="token punctuation">}</span></span><span class="token string"> | Role name: </span><span class="token interpolation"><span class="token punctuation">{</span>each_role<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string"> | Role users: </span><span class="token interpolation"><span class="token punctuation">{</span>each_role<span class="token punctuation">.</span>users<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<ol>
+<li>User 模型的 each_user.role 取的是 <code>__repr__</code>的值</li>
+<li>Role 模型的 each_role.users 取的是 <code>__repr__</code>的值</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>定义用户类 User 继承数据库模型 myDB.Model</p>
+<blockquote>
+<ol>
+<li>
+<p>定义 name 为字符型，值唯一unique，为本字段创建索引index</p>
+<pre><code class="language-python">name <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>String<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span> unique<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>定义 role_id 为整数型，为主键，将 role_id 设为 roles 表中 id 字段的外键，即 外键主表是 roles 表，子表 users 表</p>
+<pre><code class="language-python">role_id <span class="token operator">=</span> myDB<span class="token punctuation">.</span>Column<span class="token punctuation">(</span>myDB<span class="token punctuation">.</span>Integer<span class="token punctuation">,</span> myDB<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span><span class="token string">'roles.id'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>外键的作用</p>
+<blockquote>
+<ol>
+<li>
+<p>完整性：即向子表 users 表插入数据时会检查 role_id 的值在主表 roles 表中是否存在，若不存在，则插入失败。</p>
+<p>例如 roles 表有 '1', '2' 两个值，向子表 users 表插入数据 us3 = User(name = 'liuwei', role_id = 3)，则插入失败，因为 roles 表没有 '3' 这个值</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>设置数据库</p>
+<blockquote>
+<ol>
+<li>
+<p>进入数据库</p>
+<pre><code>mysql -u root -p
+</code></pre>
+</li>
+<li>
+<p>创建数据库，并使用它</p>
+<pre><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">database</span> sql_demo<span class="token punctuation">;</span>
+<span class="token keyword">use</span> sql_demo<span class="token punctuation">;</span>
+<span class="token keyword">show</span> <span class="token keyword">tables</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>在操作数据库</p>
+<blockquote>
+<ol>
+<li>删除所有表：myDB.drop_all()</li>
+<li>创建所有表：myDB.create_all()</li>
+<li>加入 session ：myDB.session.add_all([&lt;实例1&gt;, &lt;实例2&gt;])</li>
+<li>提交 session ：myDB.session.commit()</li>
+<li>删除实例：myDB.session.delete(&lt;实例1&gt;)</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</div><div class="m-content-container m-paging"><div class="m-paging-prev m-paging-item"><a href="PythonBasicTutorial.html" class="href"><span class="ui-font-ydoc"></span>Python入门导读</a></div><div class="m-paging-next m-paging-item"><a href="WebCrawlerGetStart.html" class="href">爬虫入门<span class="ui-font-ydoc"></span></a></div></div></div></div></div><div></div><script>
+    var $content = document.getElementById('js-content');
+    var $summaryItems = Array.prototype.slice.call(document.querySelectorAll('#js-menu .href'));
+    var $menu = document.getElementById('js-menu');
+    if (sessionStorage.prevPathname) {
+      sessionStorage.setItem('prevPrevPathname', sessionStorage.prevPathname);
+      sessionStorage.setItem('prevPrevMenuScrollTop', sessionStorage.prevMenuScrollTop);
+      sessionStorage.setItem('prevPrevContentScrollTop', sessionStorage.prevContentScrollTop);
+    }
+    if (sessionStorage.locationPathname) {
+      sessionStorage.setItem('prevPathname', sessionStorage.locationPathname);
+      sessionStorage.setItem('prevMenuScrollTop', sessionStorage.menuScrollTop);
+      sessionStorage.setItem('prevContentScrollTop', sessionStorage.contentScrollTop);
+    }
+    if ($menu && sessionStorage.menuScrollTop) {
+		  $menu.scrollTop = sessionStorage.menuScrollTop;
+    }
+    // 刷新页面但不切换 pathname 的时候，内容区恢复到记忆的高度
+    if ($content && sessionStorage.contentScrollTop && window.location.pathname == sessionStorage.locationPathname) {
+      $content.scrollTop = sessionStorage.contentScrollTop;
+    } else if (sessionStorage.prevPrevPathname && sessionStorage.prevPrevPathname === window.location.pathname) {
+      if ($menu && sessionStorage.prevPrevMenuScrollTop) {
+        $menu.scrollTop = sessionStorage.prevPrevMenuScrollTop;
+      }
+      if ($content && sessionStorage.prevPrevContentScrollTop) {
+        $content.scrollTop = sessionStorage.prevPrevContentScrollTop;
+      }
+    }
+    sessionStorage.setItem('locationPathname', window.location.pathname);
+    </script><script src="../ydoc/scripts/plugins/dollar.min.js"></script><script src="../ydoc/scripts/plugins/responsive-nav.min.js"></script><script src="../ydoc/scripts/plugins/slideout.min.js"></script><script src="../ydoc/scripts/app.js"></script><script src="../ydoc/ydoc-plugin-search/core.js"></script><script src="../ydoc/ydoc-plugin-search/search.js"></script><script src="../search_json.js"></script></body></html>

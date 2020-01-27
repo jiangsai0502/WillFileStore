@@ -1,0 +1,671 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="UTF-8"/><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"/><link rel="apple-touch-icon" sizes="180x180" href="../ydoc/images/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="../ydoc/images/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="../ydoc/images/favicon-16x16.png"/><link rel="manifest" href="../ydoc/images/manifest.json"/><link rel="mask-icon" href="../ydoc/images/safari-pinned-tab.svg" color="#5bbad5"/><meta name="theme-color" content="#ffffff"/><meta http-equiv="Cache-Control" content="no-transform"/><meta http-equiv="Cache-Control" content="no-siteapp"/><title>爬虫入门-社畜进阶</title><link rel="stylesheet" href="../ydoc/styles/style.css"/><meta name="author" content="ymfe"/><meta name="keywords"/><meta name="description" content="website description"/><meta id="releativePath" content=".."/><link rel="stylesheet" href="../ydoc/ydoc-plugin-search/search.css"/></head><body><div class="g-doc"><div class="m-aside"><div class="m-summary" id="js-menu"><div class="m-summary-content" id="js-menu-content"><div class="m-summary-block"><div class="m-summary-title">建站</div><ul class="m-summary-list indent"><li class="item"><a href="YDocBuild.html" class="href">Ydoc建站教程</a></li><li class="item"><a href="MarkdownUsage.html" class="href">Markdown语法</a></li><li class="item"><a href="PicGo_GitHub.html" class="href">PicGo+GitHub 搭建图床</a></li></ul></div><div class="m-summary-block"><div class="m-summary-title">杂记</div><ul class="m-summary-list indent"><li class="item"><a href="ReinstallSystem.html" class="href">重装Mac</a></li><li class="item"><a href="PythonEnvironment.html" class="href">Python周边环境</a></li><li class="item"><a href="PythonBasicTutorial.html" class="href">Python入门导读</a></li><li class="item"><a href="FlaskBasicTutorial.html" class="href">Flask入门导读</a></li><li class="item"><a href="" class="href">爬虫入门</a></li><li class="item"><a href="PMwork.html" class="href">PM工作小记</a></li><li class="item"><a href="Uncategorized.html" class="href">未分类</a></li></ul></div></div></div><div class="m-summary-switch" id="js-summary-switch"><svg viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15" class="bottom"><g transform="translate(904.92214,-879.1482)"><path d="m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,-55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,-174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,-174.68583 0.6895,0 26.281,25.03215 56.8701,55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864-231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,-104.0616 -231.873,-231.248 z" fill="#fff"></path></g></svg><svg viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15" class="top"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="aaa" fill="#fff" fill-rule="nonzero"><path d="M231.2455,342.502 L0,111.25397 L55.6165,55.62697 C86.2056,25.03212 111.7971,-2.99999998e-05 112.4866,-2.99999998e-05 C113.176,-2.99999998e-05 192.3503,78.60859 288.4293,174.6858 L463.1185,349.3716 L637.8077,174.6858 C733.8867,78.60859 813.060896,-2.99999997e-05 813.750396,-2.99999997e-05 C814.439896,-2.99999997e-05 840.031396,25.03212 870.620496,55.62697 L926.236996,111.25397 L694.9915,342.502 C567.8065,469.6884 463.4636,573.75 463.1185,573.75 C462.7734,573.75 358.4305,469.6884 231.2455,342.502 Z" id="Shape" transform="translate(463.118498, 286.874985) scale(1, -1) translate(-463.118498, -286.874985) "></path></g></g></svg></div></div><div class="m-main" id="js-panel"><header class="m-header" id="js-header"><div class="m-header-title js-logo"><a href="../index.html" target="_self"><h6 class="name">Will Jiang</h6></a></div><div><div class="m-search">
+      <div class="icon">&#xf0fd;</div>
+      <input type="text" class="input js-input" placeholder="搜索" />
+      <div class="m-search-result js-search-result"></div>
+    </div></div><nav class="m-header-nav js-nav"><ul class="m-header-items"><li class="item active"><a class="href" href="index.html">社畜进阶</a></li></ul></nav><div id="js-nav-btn" class="m-header-btn ui-font-ydoc"></div></header><div class="m-content" id="js-content"><div id="markdown-body" class="m-content-container markdown-body"><h1>爬虫入门</h1>
+<h3 id="beautifulsoup-学习">BeautifulSoup 学习</h3>
+<ol>
+<li>conda list 查看当前环境，没安装beautifulsoup4，requests</li>
+</ol>
+<blockquote>
+<pre><code>source activate jspython3
+pip install beautifulsoup4
+pip install requests
+</code></pre>
+</blockquote>
+<ol start="2">
+<li>第一个BeautifulSoup示例</li>
+</ol>
+<blockquote>
+<pre><code>import requests
+from bs4 import BeautifulSoup
+
+html_doc = &#x22;&#x22;&#x22;
+&#x3C;html&#x3E;&#x3C;head&#x3E;&#x3C;title&#x3E;The Dormouse&#x27;s story&#x3C;/title&#x3E;&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+&#x3C;p class=&#x22;title&#x22;&#x3E;&#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;&#x3C;b&#x3E;Another story&#x3C;/b&#x3E;&#x3C;/p&#x3E;
+&#x3C;p class=&#x22;story&#x22;&#x3E;Once upon a time there were three little sisters; and their names were
+&#x3C;a href=&#x22;http://example.com/elsie&#x22; class=&#x22;sister&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;,
+&#x3C;a href=&#x22;http://example.com/lacie&#x22; class=&#x22;sister&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E; and
+&#x3C;a href=&#x22;http://example.com/tillie&#x22; class=&#x22;sister&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;;
+and they lived at the bottom of a well.&#x3C;/p&#x3E;
+&#x3C;p class=&#x22;story&#x22;&#x3E;...&#x3C;/p&#x3E;
+&#x22;&#x22;&#x22;
+
+soup = BeautifulSoup(html_doc, &#x22;html.parser&#x22;)
+# &#x628A;HTML&#x6E90;&#x7801;&#x7528;&#x89E3;&#x91CA;&#x5668;html.parser&#x683C;&#x5F0F;&#x5316;&#x4E00;&#x4E0B;
+</code></pre>
+</blockquote>
+<ul>
+<li>HTML以标签对开始，标签对结束</li>
+<li>BeautifulSoup将HTML转成标签树，标签树的每个节点都是Python的对象</li>
+<li>BeautifulSoup基本元素
+<ol>
+<li>Tag：即标签，最基本的信息组织单元，分别用&lt;&gt;和&lt;/&gt;标明开头和结尾</li>
+<li>Comment：即标签内字符串的注释部分，一种特殊的Comment类型</li>
+<li>Name：获取标签的名字，&lt;p&gt;...&lt;/p&gt;的名字是'p'。
+<ul>
+<li>用法：&lt;tag&gt;.name</li>
+</ul>
+</li>
+<li>Attributes：获取标签的属性，字典的形式组织。
+<ul>
+<li>用法：&lt;tag&gt;.attrs</li>
+</ul>
+</li>
+<li>NavigableString：获取标签内非属性字符串，&lt;&gt;...&lt;/&gt;中的字符串。
+<ul>
+<li>用法：&lt;tag&gt;.string</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>常用方法
+<ul>
+<li>.find()
+<ul>
+<li>soup.find('a')
+<ul>
+<li>获取源码中第一个&lt;a&gt;...&lt;/a&gt;标签内容对象</li>
+</ul>
+</li>
+<li>soup.find('a', id='next')
+<ul>
+<li>获取源码中第一个有属性为id，值为next的&lt;a&gt;对象，比如&lt;a id=&quot;next&quot;&gt;...&lt;/a&gt;。</li>
+</ul>
+</li>
+<li>注1：属性id、src、name都可以这么用，唯独class这个属性因为是Python关键字，不能直接使用，要用 class_ 进行代替，如soup.find('a', class_ = 'next')</li>
+<li>注2：find返回的结果，依然可以继续使用find()或者find_all()方法</li>
+</ul>
+</li>
+<li>.find_all()
+<ul>
+<li>soup.find_all('a')
+<ul>
+<li>获取源码中所有的&lt;a&gt;...&lt;/a&gt;标签内容对象</li>
+</ul>
+</li>
+<li>soup.find_all('a', id='next')
+<ul>
+<li>获取源码中所有包含属性为id，值为next的&lt;a&gt;对象，比如&lt;a id=&quot;next&quot;&gt;...&lt;/a&gt;。</li>
+</ul>
+</li>
+<li>注1：find_all返回的结果，依然可以继续使用find()或者find_all()方法</li>
+<li>注2：find_all返回的结果很大时，可以用limit参数限制返回结果的数量，适用于测试时soup.find('a', class_ = 'next', limit = 2)</li>
+</ul>
+</li>
+<li>.string
+<ul>
+<li>获取标签的文本字符串</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<pre><code>print(&#x27;soup.prettify() = &#x27;,soup.prettify())
+print(&#x27;soup.title = &#x27;,soup.title)
+print(&#x27;soup.title.name = &#x27;,soup.title.name)
+print(&#x27;soup.title.string = &#x27;,soup.title.string)
+print(&#x27;soup.title.text = &#x27;,soup.title.text)
+print(&#x27;soup.title.parent.name = &#x27;,soup.title.parent.name)
+print(&#x27;soup.p = &#x27;,soup.p)
+print(&#x27;soup.p[&#x22;class&#x22;] = &#x27;,soup.p[&#x22;class&#x22;])
+print(&#x27;soup.a = &#x27;,soup.a)
+print(&#x27;soup.a.string = &#x27;,soup.a.string)
+print(&#x27;soup.a.attrs = &#x27;,soup.a.attrs)
+print(&#x27;soup.a.attrs[&#x22;href&#x22;] = &#x27;,soup.a.attrs[&#x27;href&#x27;])
+print(&#x27;soup.find_all(&#x22;a&#x22;) = &#x27;,soup.find_all(&#x27;a&#x27;))
+print(&#x27;soup.find(id=&#x22;link3&#x22;) = &#x27;,soup.find(id=&#x27;link3&#x27;))
+</code></pre>
+<p>运行结果</p>
+<pre><code>soup.title =  &#x3C;title&#x3E;The Dormouse&#x27;s story&#x3C;/title&#x3E;
+# &#x5373;soup&#x4E2D;&#x7684;title&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;
+# &#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.title.name =  title
+# &#x5373;soup&#x4E2D;&#x7684;title&#x6807;&#x7B7E;&#x7684;&#x540D;&#x5B57;
+
+soup.title.string =  The Dormouse&#x27;s story
+# &#x5373;soup&#x4E2D;&#x7684;title&#x6807;&#x7B7E;&#x7684;&#x6587;&#x672C;&#x5B57;&#x7B26;&#x4E32;
+
+soup.title.parent.name =  head
+# &#x5373;soup&#x4E2D;&#x7684;title&#x6807;&#x7B7E;&#x7684;&#x7236;&#x8282;&#x70B9;&#x7684;&#x540D;&#x5B57;
+
+soup.p =  &#x3C;p class=&#x22;title&#x22;&#x3E;&#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;&#x3C;b&#x3E;Another story&#x3C;/b&#x3E;&#x3C;/p&#x3E;
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;p&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;
+# &#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.p[&#x22;class&#x22;] =  [&#x27;title&#x27;]
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;p&#x6807;&#x7B7E;&#x7684;&#x27;class&#x27;&#x5C5E;&#x6027;&#x7684;&#x5185;&#x5BB9;
+
+soup.a =  &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;a&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;
+# &#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.a.string =  Elsie
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;a&#x6807;&#x7B7E;&#x7684;&#x6587;&#x672C;
+
+&#x3E; soup.a.text =  Elsie
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;a&#x6807;&#x7B7E;&#x7684;&#x6587;&#x672C;&#xFF0C;&#x4E0E;soup.a.string&#x4E00;&#x6837;
+
+soup.a.attrs =  {&#x27;href&#x27;: &#x27;http://example.com/elsie&#x27;, &#x27;class&#x27;: [&#x27;sister&#x27;], &#x27;id&#x27;: &#x27;link1&#x27;}
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;a&#x6807;&#x7B7E;&#x7684;&#x5B57;&#x5178;
+
+soup.a.attrs[&#x22;href&#x22;] =  http://example.com/elsie
+# &#x5373;soup&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;a&#x6807;&#x7B7E;&#x7684;&#x5B57;&#x5178;&#x4E2D;key&#x4E3A;&#x22;href&#x22;&#x7684;&#x503C;
+
+soup.find_all(&#x22;a&#x22;) =  [&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;, &#x3C;a class=&#x22;sister&#x22; &#x3E; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E;, &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; &#x3E; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;]
+# &#x5373;soup&#x4E2D;&#x7684;&#x6240;&#x6709;a&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#x7684;&#x5217;&#x8868;
+# &#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.find(id=&#x22;link3&#x22;) =  &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;
+# &#x5373;soup&#x4E2D;id=&#x22;link3&#x22;&#x6240;&#x5728;&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;
+# &#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+</code></pre>
+</blockquote>
+<ul>
+<li>下行遍历：从当前节点向子孙节点遍历
+<ul>
+<li>.contents：获取全部儿子节点的全部内容的列表（全部内容包含标签，属性，文本，及子孙节点的标签，属性，文本）</li>
+<li>.children：获取儿子节点的迭代类型，用于遍历</li>
+<li>.descendants：获取子孙节点的迭代类型，用于遍历
+<ul>
+<li>注：.contents和.children只获得当前节点的下一层节点的信息，而.descendants可获得当前节点后续的所有节点的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<pre><code>print(&#x27;soup.body = &#x27;,soup.body)
+print(&#x27;soup.body.contents = &#x27;,soup.body.contents)
+
+num = 1
+print(&#x27;soup.body.children = &#x27;)
+for child in soup.body.children:
+    print(&#x22;&#x7B2C;&#x22; + str(num) + &#x22;&#x4E2A;&#x513F;&#x5B50;&#xFF1A;&#x22; , child)
+    num += 1
+
+num = 1
+print(&#x27;soup.body.descendants = &#x27;)
+for descendant in soup.body.descendants:
+    print(&#x22;&#x7B2C;&#x22; + str(num) + &#x22;&#x4E2A;&#x5B50;&#x5B59;&#xFF1A;&#x22; , descendant)
+    num += 1
+</code></pre>
+<p>运行结果</p>
+<pre><code>soup.body =  
+&#x3C;body&#x3E;
+&#x3C;p class=&#x22;title&#x22;&#x3E;&#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;&#x3C;b&#x3E;Another story&#x3C;/b&#x3E;&#x3C;/p&#x3E;
+&#x3C;p class=&#x22;story&#x22;&#x3E;Once upon a time there were three little sisters; and their names were
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;,
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E; and
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;;
+and they lived at the bottom of a well.&#x3C;/p&#x3E;
+&#x3C;p class=&#x22;story&#x22;&#x3E;...&#x3C;/p&#x3E;
+&#x3C;/body&#x3E;
+# &#x83B7;&#x53D6;&#x6574;&#x4E2A;&#x3C;body&#x3E;&#x2026;&#x2026;&#x3C;/body&#x3E;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;
+# &#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.body.contents =  
+[&#x27;\n&#x27;, &#x3C;p class=&#x22;title&#x22;&#x3E;&#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;&#x3C;b&#x3E;Another story&#x3C;/b&#x3E;&#x3C;/p&#x3E;, &#x27;\n&#x27;, &#x3C;p class=&#x22;story&#x22;&#x3E;Once upon a &#x3E; time there were three little sisters; and their names were
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;,
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E; and
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;;
+and they lived at the bottom of a well.&#x3C;/p&#x3E;, &#x27;\n&#x27;, &#x3C;p class=&#x22;story&#x22;&#x3E;...&#x3C;/p&#x3E;, &#x27;\n&#x27;]
+# &#x83B7;&#x53D6;&#x3C;body&#x3E;&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x513F;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#x7684;&#x5217;&#x8868;
+# &#x513F;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.body.children = 
+&#x7B2C;1&#x4E2A;&#x513F;&#x5B50;&#xFF1A; 
+&#x7B2C;2&#x4E2A;&#x513F;&#x5B50;&#xFF1A; &#x3C;p class=&#x22;title&#x22;&#x3E;&#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;&#x3C;/p&#x3E;
+&#x7B2C;3&#x4E2A;&#x513F;&#x5B50;&#xFF1A; 
+&#x7B2C;4&#x4E2A;&#x513F;&#x5B50;&#xFF1A; &#x3C;p class=&#x22;story&#x22;&#x3E;Once upon a time there were three little sisters; and their names were
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;,
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E; and
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;;
+and they lived at the bottom of a well.&#x3C;/p&#x3E;
+&#x7B2C;5&#x4E2A;&#x513F;&#x5B50;&#xFF1A; 
+&#x7B2C;6&#x4E2A;&#x513F;&#x5B50;&#xFF1A; &#x3C;p class=&#x22;story&#x22;&#x3E;...&#x3C;/p&#x3E;
+&#x7B2C;7&#x4E2A;&#x513F;&#x5B50;&#xFF1A; 
+# &#x83B7;&#x53D6;&#x3C;body&#x3E;&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x513F;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5185;&#x5BB9;
+# &#x513F;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+
+soup.body.descendants = 
+&#x7B2C;1&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; 
+&#x7B2C;2&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;p class=&#x22;title&#x22;&#x3E;&#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;&#x3C;b&#x3E;Another story&#x3C;/b&#x3E;&#x3C;/p&#x3E;
+&#x7B2C;3&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;b&#x3E;The Dormouse&#x27;s story&#x3C;/b&#x3E;
+&#x7B2C;4&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; The Dormouse&#x27;s story
+&#x7B2C;5&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;b&#x3E;Another story&#x3C;/b&#x3E;
+&#x7B2C;6&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; Another story
+&#x7B2C;7&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; 
+&#x7B2C;8&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;p class=&#x22;story&#x22;&#x3E;Once upon a time there were three little sisters; and their names were
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;,
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E; and
+&#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;;
+and they lived at the bottom of a well.&#x3C;/p&#x3E;
+&#x7B2C;9&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; Once upon a time there were three little sisters; and their names were
+&#x7B2C;10&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/elsie&#x22; id=&#x22;link1&#x22;&#x3E;Elsie&#x3C;/a&#x3E;
+&#x7B2C;11&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; Elsie
+&#x7B2C;12&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; ,
+&#x7B2C;13&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E;
+&#x7B2C;14&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; Lacie
+&#x7B2C;15&#x4E2A;&#x5B50;&#x5B59;&#xFF1A;  and
+&#x7B2C;16&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;/a&#x3E;
+&#x7B2C;17&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; Tillie
+&#x7B2C;18&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; ;
+and they lived at the bottom of a well.
+&#x7B2C;19&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; 
+&#x7B2C;20&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; &#x3C;p class=&#x22;story&#x22;&#x3E;...&#x3C;/p&#x3E;
+&#x7B2C;21&#x4E2A;&#x5B50;&#x5B59;&#xFF1A; ...
+&#x7B2C;22&#x4E2A;&#x5B50;&#x5B59;&#xFF1A;  
+# &#x83B7;&#x53D6;&#x3C;body&#x3E;&#x6807;&#x7B7E;&#x7684;&#x5168;&#x90E8;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#xFF0C;&#x9996;&#x5148;&#x83B7;&#x53D6;&#x7B2C;1&#x4E2A;&#x513F;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x5165;&#x7B2C;1&#x4E2A;&#x513F;&#x5B50;&#x8282;&#x70B9;&#x83B7;&#x53D6;&#x7B2C;&#x4E00;&#x4E2A;&#x5B59;&#x5B50;&#x8282;&#x70B9;&#xFF0C;&#x76F4;&#x5230;&#x6CA1;&#x6709;&#x4E0B;&#x7EA7;&#x8282;&#x70B9;&#x540E;&#xFF0C;&#x83B7;&#x53D6;&#x540C;&#x7EA7;&#x7684;&#x5B59;&#x5B50;&#x8282;&#x70B9;&#x53CA;&#x5176;&#x4E0B;&#x7EA7;&#x8282;&#x70B9;&#xFF0C;&#x540C;&#x7EA7;&#x904D;&#x5386;&#x7ED3;&#x675F;&#x540E;&#x8FD4;&#x56DE;&#x4E0A;&#x7EA7;&#x8282;&#x70B9;
+# &#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#x5305;&#x542B;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;&#xFF0C;&#x53CA;&#x5B50;&#x5B59;&#x8282;&#x70B9;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5C5E;&#x6027;&#xFF0C;&#x6587;&#x672C;
+</code></pre>
+</blockquote>
+<ul>
+<li>上行遍历：从当前节点向父祖节点遍历
+<ul>
+<li>.parent：获取当前节点的<strong>父节点</strong>标签的全部内容（全部内容包含标签，属性，文本，及子孙节点的标签，属性，文本）</li>
+<li>.parents：获取当前节点的<strong>父祖节点</strong>标签的全部内容的迭代类型</li>
+<li>目前不知用处</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<pre><code>for parent in soup.a.parents:
+    if parent is None:
+        print(&#x27;soup.a.parent = &#x27;,parent)
+    else:
+        print(&#x27;soup.a.parent.name = &#x27;,parent.name)
+</code></pre>
+<p>运行结果</p>
+<pre><code>soup.a.parent.name =  p
+soup.a.parent.name =  body
+soup.a.parent.name =  html
+soup.a.parent.name =  [document]
+</code></pre>
+</blockquote>
+<ul>
+<li>平行遍历：同一父节点下的子节点遍历
+<ul>
+<li>.next_sibling：获取同一父节点下的下一个兄弟节点标签</li>
+<li>.previous_sibling：获取同一父节点下的上一个兄弟节点标签</li>
+<li>.next_siblings：迭代类型，获取同一父节点下的所有后续兄弟节点标签</li>
+<li>.previous_siblings：迭代类型，获取同一父节点下的所有前续兄弟节点标签</li>
+<li>目前不知用处</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<pre><code>for sibling in soup.a.next_siblings:
+    print(&#x27;soup.a.next_sibling = &#x27;,sibling)
+&#x8FD0;&#x884C;&#x7ED3;&#x679C;
+soup.a.next_sibling =  ,
+soup.a.next_sibling =  &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/lacie&#x22; id=&#x22;link2&#x22;&#x3E;Lacie&#x3C;/a&#x3E;
+soup.a.next_sibling =   and
+soup.a.next_sibling =  &#x3C;a class=&#x22;sister&#x22; href=&#x22;http://example.com/tillie&#x22; id=&#x22;link3&#x22;&#x3E;Tillie&#x3C;b&#x3E;Another &#x3E; story&#x3C;/b&#x3E;&#x3C;/a&#x3E;
+soup.a.next_sibling =  ;
+and they lived at the bottom of a well.
+</code></pre>
+</blockquote>
+<h3 id="爬虫之beautifulsoup解析豆瓣即将上映的电影信息">爬虫之BeautifulSoup解析豆瓣即将上映的电影信息</h3>
+<blockquote>
+<p><strong>目的</strong>：获取<a href="https://movie.douban.com/cinema/later/chengdu/" target="_blank">豆瓣电影</a>页面电影列表的名字、详情链接、上映时间、影片类型、地区、关注者数量</p>
+<p><a href="https://www.jianshu.com/p/c64fe2a20bc9" target="_blank">原教程</a></p>
+</blockquote>
+<h4>思路</h4>
+<h5>1. 分析网页</h5>
+<blockquote>
+<p>这一步非常重要，直接影响了我们能不能提取到我们想要的内容。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200116103822.png" alt></p>
+<ul>
+<li>找到网页中的第一个电影的名字，<strong>鼠标指向该名字</strong>，点击右键，选择&quot;检查&quot;，页面上会打开&quot;开发者工具&quot;窗口，焦点会定位到电影名字</li>
+<li>当鼠标划到图片中的&lt;ul&gt;...&lt;/ul&gt;标签的时候，&quot;复仇者联盟&quot;的详细信息被选中了。</li>
+<li>当鼠标划到下一个&lt;div class=&quot;item mod odd&quot;&gt;...&lt;/div&gt;的时候，下一个影片&quot;战犬瑞克斯&quot;的所有信息被选中了。</li>
+<li>当鼠标划到图片上方的&lt;div id=&quot;showing-soon&quot; class=&quot;tab-bd&quot;&gt;的时候，整个网页中我们需要采集的影片信息都被选中了。</li>
+</ul>
+<p><em><strong>这几个动作说明</strong></em></p>
+<blockquote>
+<p>1.我们需要的内容全都在&lt;div id=&quot;showing-soon&quot; class=&quot;tab-bd&quot;&gt;...&lt;/div&gt;里面。<br>
+2.每个影片的信息，都在一个&lt;div class=&quot;item mod odd&quot;&gt;...&lt;/div&gt;或者&lt;div class=&quot;item mod&quot;&gt;...&lt;/div&gt;里面。画面左边的影片没有odd属性，右边的有odd属性(这好像对于我们采集信息没啥用)。</p>
+</blockquote>
+<h5>2. 制订提取策略</h5>
+<ol>
+<li>先找到囊括了所有的影片的最大的div</li>
+<li>再从最大的div里找到每一个影片的div</li>
+<li>最后从每个影片的div里面解析出来我们需要的名字、链接等等信息</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/jiangsai0502/PicBedRepo/master/img/20200116124725.png" alt></p>
+<p>从上图得知目标位置</p>
+<table>
+<thead>
+<tr>
+<th>电影属性</th>
+<th>源码中的位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电影名</td>
+<td>在第 2 个&lt;a&gt;标签里面</td>
+</tr>
+<tr>
+<td>链接</td>
+<td>在第 1 个和第 2 个&lt;a&gt;标签的 href 属性里面</td>
+</tr>
+<tr>
+<td>上映日期</td>
+<td>在第 1 个&lt;li&gt;标签里面</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>在第 2 个&lt;li&gt;标签里面</td>
+</tr>
+<tr>
+<td>地区</td>
+<td>在第 3 个&lt;li&gt;标签里面</td>
+</tr>
+<tr>
+<td>关注者数量</td>
+<td>在第 4 个&lt;li&gt;标签里面</td>
+</tr>
+</tbody>
+</table>
+<h5>3. 获取目标内容方式</h5>
+<ol>
+<li>电影名：先获取所有的&lt;a&gt;标签，再取第二个&lt;a&gt;标签的 text</li>
+<li>链接：利用上一步获取的所有标签，取第二个&lt;a&gt;标签的href属性</li>
+<li>其他信息：先获取所有的&lt;li&gt;标签，再依次取出里面的text的值就是我们所需要的目标，上映日期，类型，地区等等</li>
+</ol>
+<h4>源码及分析</h4>
+<pre><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
+
+<span class="token keyword">def</span> <span class="token function">GetSoup</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    fake_headers <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'</span>
+    <span class="token punctuation">}</span>
+    response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers<span class="token operator">=</span>fake_headers<span class="token punctuation">)</span>
+    html <span class="token operator">=</span> response<span class="token punctuation">.</span>content<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    soup <span class="token operator">=</span> BeautifulSoup<span class="token punctuation">(</span>html<span class="token punctuation">,</span> <span class="token string">'html.parser'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> soup
+
+<span class="token keyword">def</span> <span class="token function">GetBigData</span><span class="token punctuation">(</span>soup<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    all_movies <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"showing-soon"</span><span class="token punctuation">)</span>
+    bigData <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> each_movie <span class="token keyword">in</span> all_movies<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> class_<span class="token operator">=</span><span class="token string">"item"</span><span class="token punctuation">,</span> limit <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        data <span class="token operator">=</span> Data<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 先获取所有的&lt;a>标签</span>
+        all_a_tag <span class="token operator">=</span> each_movie<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+        <span class="token comment"># 再取第二个&lt;a>标签的 text，即电影名</span>
+        data<span class="token punctuation">.</span>movie_name <span class="token operator">=</span> all_a_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        <span class="token comment"># 再取第二个&lt;a>标签的 'href'属性，即电影链接</span>
+        data<span class="token punctuation">.</span>moive_href <span class="token operator">=</span> all_a_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'href'</span><span class="token punctuation">]</span>
+
+        <span class="token comment"># 先获取所有的&lt;li>标签</span>
+        all_li_tag <span class="token operator">=</span> each_movie<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>
+        <span class="token comment"># 再取第二个&lt;li>标签的 text，即日期</span>
+        data<span class="token punctuation">.</span>movie_date <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        data<span class="token punctuation">.</span>movie_type <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        data<span class="token punctuation">.</span>movie_area <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        data<span class="token punctuation">.</span>movie_lovers <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        <span class="token comment">#print(f'名字：{data.movie_name}\n 链接：{data.moive_href}\n 日期：{data.movie_date}\n 类型：{data.movie_type}\n 地区：{data.movie_area}\n 关注者：{data.movie_lovers}\n')</span>
+        bigData<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> bigData
+
+<span class="token keyword">def</span> <span class="token function">PrintBigData</span><span class="token punctuation">(</span>bigData<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> data <span class="token keyword">in</span> bigData<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'名字：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_name<span class="token punctuation">}</span></span><span class="token string">\n 链接：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>moive_href<span class="token punctuation">}</span></span><span class="token string">\n 日期：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_date<span class="token punctuation">}</span></span><span class="token string">\n 类型：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_type<span class="token punctuation">}</span></span><span class="token string">\n 地区：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_area<span class="token punctuation">}</span></span><span class="token string">\n 关注者：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_lovers<span class="token punctuation">}</span></span><span class="token string">\n'</span></span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    url <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/cinema/later/chengdu/"</span>
+    soup <span class="token operator">=</span> GetSoup<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    bigData <span class="token operator">=</span> GetBigData<span class="token punctuation">(</span>soup<span class="token punctuation">)</span>
+    PrintBigData<span class="token punctuation">(</span>bigData<span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<ol>
+<li>
+<p>伪装成浏览器的header</p>
+<pre><code class="language-python">fake_headers <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li>
+<p>先找到囊括了所有的影片的最大的div</p>
+<pre><code class="language-python">all_movies <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"showing-soon"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>all_movies<span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>再从最大的div里找到每一个影片的div</p>
+<pre><code class="language-python"><span class="token keyword">for</span> each_movie <span class="token keyword">in</span> all_movies<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> class_<span class="token operator">=</span><span class="token string">"item"</span><span class="token punctuation">,</span> limit <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"电影信息：\n"</span><span class="token punctuation">,</span>each_movie<span class="token punctuation">)</span>
+    <span class="token comment"># 先获取所有的&lt;a>标签</span>
+    all_a_tag <span class="token operator">=</span> each_movie<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+    <span class="token comment"># 再取第二个&lt;a>标签的 text，即电影名</span>
+    movie_name <span class="token operator">=</span> all_a_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+    <span class="token comment"># 再取第二个&lt;a>标签的 'href'属性，即电影链接</span>
+    moive_href <span class="token operator">=</span> all_a_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'href'</span><span class="token punctuation">]</span>
+
+    <span class="token comment"># 先获取所有的&lt;li>标签</span>
+    all_li_tag <span class="token operator">=</span> each_movie<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>
+    <span class="token comment"># 再取第二个&lt;li>标签的 text，即日期</span>
+    movie_date <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+    movie_type <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+    movie_area <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+    movie_lovers <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+</code></pre>
+<blockquote>
+<ol>
+<li>源码中 class 的值有 &quot;item mod odd&quot; 和 &quot;item mod&quot;，tag的 class 属性是多值属性，可以分别搜索tag中的每个CSS类名，如class_=&quot;item&quot;,class_=&quot;mod&quot;,class_=[&quot;item&quot;,&quot;mod&quot;]</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<pre><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
+<span class="token keyword">import</span> csv
+
+<span class="token comment"># 空类的作用是存数据</span>
+<span class="token keyword">class</span> <span class="token class-name">Data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">GetSoup</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    fake_headers <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'</span>
+    <span class="token punctuation">}</span>
+    response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers<span class="token operator">=</span>fake_headers<span class="token punctuation">)</span>
+    html <span class="token operator">=</span> response<span class="token punctuation">.</span>content<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    soup <span class="token operator">=</span> BeautifulSoup<span class="token punctuation">(</span>html<span class="token punctuation">,</span> <span class="token string">'html.parser'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> soup
+
+<span class="token keyword">def</span> <span class="token function">GetBigData</span><span class="token punctuation">(</span>soup<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    all_movies <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"showing-soon"</span><span class="token punctuation">)</span>
+    bigData <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> each_movie <span class="token keyword">in</span> all_movies<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span> class_<span class="token operator">=</span><span class="token string">"item"</span><span class="token punctuation">,</span> limit <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        data <span class="token operator">=</span> Data<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 先获取所有的&lt;a>标签</span>
+        all_a_tag <span class="token operator">=</span> each_movie<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+        <span class="token comment"># 再取第二个&lt;a>标签的 text，即电影名</span>
+        data<span class="token punctuation">.</span>movie_name <span class="token operator">=</span> all_a_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        <span class="token comment"># 再取第二个&lt;a>标签的 'href'属性，即电影链接</span>
+        data<span class="token punctuation">.</span>moive_href <span class="token operator">=</span> all_a_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'href'</span><span class="token punctuation">]</span>
+
+        <span class="token comment"># 先获取所有的&lt;li>标签</span>
+        all_li_tag <span class="token operator">=</span> each_movie<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>
+        <span class="token comment"># 再取第二个&lt;li>标签的 text，即日期</span>
+        data<span class="token punctuation">.</span>movie_date <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        data<span class="token punctuation">.</span>movie_type <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        data<span class="token punctuation">.</span>movie_area <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        data<span class="token punctuation">.</span>movie_lovers <span class="token operator">=</span> all_li_tag<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+        bigData<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> bigData
+
+<span class="token keyword">def</span> <span class="token function">PrintBigData</span><span class="token punctuation">(</span>bigData<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> data <span class="token keyword">in</span> bigData<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'名字：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_name<span class="token punctuation">}</span></span><span class="token string">\n 链接：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>moive_href<span class="token punctuation">}</span></span><span class="token string">\n 日期：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_date<span class="token punctuation">}</span></span><span class="token string">\n 类型：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_type<span class="token punctuation">}</span></span><span class="token string">\n 地区：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_area<span class="token punctuation">}</span></span><span class="token string">\n 关注者：</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_lovers<span class="token punctuation">}</span></span><span class="token string">\n'</span></span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">WriteToTxt</span><span class="token punctuation">(</span>bigData<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'/Users/jiangsai02/Documents/Temp/WebCrawler.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> OpenTxt<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> data <span class="token keyword">in</span> bigData<span class="token punctuation">:</span>
+            <span class="token keyword">for</span> each_key<span class="token punctuation">,</span>each_value <span class="token keyword">in</span> data<span class="token punctuation">.</span>__dict__<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                OpenTxt<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>each_key<span class="token punctuation">}</span></span><span class="token string">":"</span><span class="token interpolation"><span class="token punctuation">{</span>each_value<span class="token punctuation">}</span></span><span class="token string">\n'</span></span><span class="token punctuation">)</span>
+            OpenTxt<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">WriteToHtml</span><span class="token punctuation">(</span>bigData<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    html_begin <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token triple-quoted-string string">"""
+                &lt;!DOCTYPE html>
+                &lt;html>
+                &lt;head>
+                    &lt;meta charset="UTF-8">
+                    &lt;title>豆瓣电影即将上映影片信息&lt;/title>
+                    &lt;link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+                &lt;/head>
+                &lt;body>
+                &lt;h2 class="text-center">豆瓣电影即将上映影片信息&lt;/h2>
+                &lt;table class="table table-striped table-hover mx-auto text-center">
+                    &lt;thead>
+                        &lt;tr>
+                            &lt;th>影片名&lt;/th>
+                            &lt;th>上映日期&lt;/th>
+                            &lt;th>影片类型&lt;/th>
+                            &lt;th>地区&lt;/th>
+                            &lt;th>关注者数量&lt;/th>
+                        &lt;/tr>
+                    &lt;/thead>
+                    &lt;tbody>
+                """</span><span class="token punctuation">)</span>
+    html_end <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token triple-quoted-string string">"""
+                    &lt;/tbody>
+                &lt;/table>
+                &lt;/body>
+                &lt;/html>
+                """</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">each_movie_info</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        movie_info <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"""
+                        &lt;tr>
+                            &lt;td>&lt;a href="</span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>moive_href<span class="token punctuation">}</span></span><span class="token string">"></span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_name<span class="token punctuation">}</span></span><span class="token string">&lt;/a>&lt;/td>
+                            &lt;td></span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_date<span class="token punctuation">}</span></span><span class="token string">&lt;/td>
+                            &lt;td></span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_type<span class="token punctuation">}</span></span><span class="token string">&lt;/td>
+                            &lt;td></span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_area<span class="token punctuation">}</span></span><span class="token string">&lt;/td>
+                            &lt;td></span><span class="token interpolation"><span class="token punctuation">{</span>data<span class="token punctuation">.</span>movie_lovers<span class="token punctuation">}</span></span><span class="token string">&lt;/td>
+                        &lt;/tr>
+                    """</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> movie_info
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'/Users/jiangsai02/Documents/Temp/WebCrawler.html'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> OpenHtml<span class="token punctuation">:</span>
+        OpenHtml<span class="token punctuation">.</span>write<span class="token punctuation">(</span>html_begin<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> data <span class="token keyword">in</span> bigData<span class="token punctuation">:</span>
+            html_movie_info <span class="token operator">=</span> each_movie_info<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+            OpenHtml<span class="token punctuation">.</span>write<span class="token punctuation">(</span>html_movie_info<span class="token punctuation">)</span>
+        OpenHtml<span class="token punctuation">.</span>write<span class="token punctuation">(</span>html_end<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">WriteToCSV</span><span class="token punctuation">(</span>bigData<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># Windows默认编码是gbk，如果用utf-8，excel打开可能会乱码</span>
+    <span class="token comment"># newline='' 是为了让writer自动添加的换行符和文件的不重复，防止出现跳行的情况</span>
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'/Users/jiangsai02/Documents/Temp/WebCrawler.csv'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">"gbk"</span><span class="token punctuation">,</span> newline<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span> <span class="token keyword">as</span> OpenCSV<span class="token punctuation">:</span>
+        CSVwriter <span class="token operator">=</span> csv<span class="token punctuation">.</span>writer<span class="token punctuation">(</span>OpenCSV<span class="token punctuation">)</span>
+        CSVwriter<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"影片名"</span><span class="token punctuation">,</span> <span class="token string">"链接"</span><span class="token punctuation">,</span> <span class="token string">"上映日期"</span><span class="token punctuation">,</span> <span class="token string">"影片类型"</span><span class="token punctuation">,</span> <span class="token string">"地区"</span><span class="token punctuation">,</span> <span class="token string">"关注者"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> data <span class="token keyword">in</span> bigData<span class="token punctuation">:</span>
+            CSVwriter<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">[</span>data<span class="token punctuation">.</span>movie_name<span class="token punctuation">,</span> data<span class="token punctuation">.</span>moive_href<span class="token punctuation">,</span> data<span class="token punctuation">.</span>movie_date<span class="token punctuation">,</span> data<span class="token punctuation">.</span>movie_type<span class="token punctuation">,</span> data<span class="token punctuation">.</span>movie_area<span class="token punctuation">,</span> data<span class="token punctuation">.</span>movie_lovers<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    url <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/cinema/later/chengdu/"</span>
+    soup <span class="token operator">=</span> GetSoup<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    bigData <span class="token operator">=</span> GetBigData<span class="token punctuation">(</span>soup<span class="token punctuation">)</span>
+    PrintBigData<span class="token punctuation">(</span>bigData<span class="token punctuation">)</span>
+    WriteToTxt<span class="token punctuation">(</span>bigdata<span class="token punctuation">)</span>
+    WriteToHtml<span class="token punctuation">(</span>bigdata<span class="token punctuation">)</span>
+    WriteToCSV<span class="token punctuation">(</span>bigData<span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<ol>
+<li>
+<p>GetSoup(url)：网页转换成 BeautifulSoup 对象</p>
+<blockquote>
+<p>这是个通用方法，以后直接用即可</p>
+</blockquote>
+</li>
+<li>
+<p>GetBigData(soup)：从 BeautifulSoup 对象中获取目的数据</p>
+<blockquote>
+<p>这是整个程序的关键，具体分析可往上翻分析策略</p>
+</blockquote>
+</li>
+<li>
+<p>PrintBigData(bigData)：打印目的数据，判断是否遗漏</p>
+</li>
+<li>
+<p>WriteToTxt(bigdata)：写入txt</p>
+</li>
+<li>
+<p>WriteToHtml(bigdata)：写入html</p>
+<blockquote>
+<p>html 的拼接可以借鉴</p>
+</blockquote>
+</li>
+<li>
+<p>WriteToCSV(bigData)：写入csv</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="爬虫之读写">爬虫之读写</h3>
+<pre><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
+
+<span class="token comment"># 伪装成浏览器的header</span>
+url <span class="token operator">=</span> <span class="token string">"https://python123.io/ws/demo.html"</span>
+<span class="token comment"># 请求参数里面把伪装的header加上</span>
+fake_headers <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'</span>
+<span class="token punctuation">}</span>
+
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers<span class="token operator">=</span>fake_headers<span class="token punctuation">)</span>
+html <span class="token operator">=</span> response<span class="token punctuation">.</span>content<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+soup <span class="token operator">=</span> BeautifulSoup<span class="token punctuation">(</span>html<span class="token punctuation">,</span> <span class="token string">'html.parser'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>soup<span class="token punctuation">)</span>
+</code></pre>
+<h4>1.写操作，写入时覆盖原文</h4>
+<pre><code class="language-python"><span class="token comment"># 自动关闭文件</span>
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'/Users/jiangsai02/Documents/Temp/WebCrawler.html'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> OpenHtml<span class="token punctuation">:</span>
+    OpenHtml<span class="token punctuation">.</span>write<span class="token punctuation">(</span>response<span class="token punctuation">.</span>content<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h4>2.读操作</h4>
+<pre><code># &#x81EA;&#x52A8;&#x5173;&#x95ED;&#x6587;&#x4EF6;
+with open(&#x27;/Users/jiangsai02/Documents/Temp/WebCrawler.html&#x27;, &#x27;r&#x27;, encoding=&#x22;utf-8&#x22;) as OpenHtml:
+    Html = OpenHtml.read()
+</code></pre>
+</div><div class="m-content-container m-paging"><div class="m-paging-prev m-paging-item"><a href="FlaskBasicTutorial.html" class="href"><span class="ui-font-ydoc"></span>Flask入门导读</a></div><div class="m-paging-next m-paging-item"><a href="PMwork.html" class="href">PM工作小记<span class="ui-font-ydoc"></span></a></div></div></div></div></div><div></div><script>
+    var $content = document.getElementById('js-content');
+    var $summaryItems = Array.prototype.slice.call(document.querySelectorAll('#js-menu .href'));
+    var $menu = document.getElementById('js-menu');
+    if (sessionStorage.prevPathname) {
+      sessionStorage.setItem('prevPrevPathname', sessionStorage.prevPathname);
+      sessionStorage.setItem('prevPrevMenuScrollTop', sessionStorage.prevMenuScrollTop);
+      sessionStorage.setItem('prevPrevContentScrollTop', sessionStorage.prevContentScrollTop);
+    }
+    if (sessionStorage.locationPathname) {
+      sessionStorage.setItem('prevPathname', sessionStorage.locationPathname);
+      sessionStorage.setItem('prevMenuScrollTop', sessionStorage.menuScrollTop);
+      sessionStorage.setItem('prevContentScrollTop', sessionStorage.contentScrollTop);
+    }
+    if ($menu && sessionStorage.menuScrollTop) {
+		  $menu.scrollTop = sessionStorage.menuScrollTop;
+    }
+    // 刷新页面但不切换 pathname 的时候，内容区恢复到记忆的高度
+    if ($content && sessionStorage.contentScrollTop && window.location.pathname == sessionStorage.locationPathname) {
+      $content.scrollTop = sessionStorage.contentScrollTop;
+    } else if (sessionStorage.prevPrevPathname && sessionStorage.prevPrevPathname === window.location.pathname) {
+      if ($menu && sessionStorage.prevPrevMenuScrollTop) {
+        $menu.scrollTop = sessionStorage.prevPrevMenuScrollTop;
+      }
+      if ($content && sessionStorage.prevPrevContentScrollTop) {
+        $content.scrollTop = sessionStorage.prevPrevContentScrollTop;
+      }
+    }
+    sessionStorage.setItem('locationPathname', window.location.pathname);
+    </script><script src="../ydoc/scripts/plugins/dollar.min.js"></script><script src="../ydoc/scripts/plugins/responsive-nav.min.js"></script><script src="../ydoc/scripts/plugins/slideout.min.js"></script><script src="../ydoc/scripts/app.js"></script><script src="../ydoc/ydoc-plugin-search/core.js"></script><script src="../ydoc/ydoc-plugin-search/search.js"></script><script src="../search_json.js"></script></body></html>
